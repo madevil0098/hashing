@@ -2,13 +2,10 @@ const express = require('express');
 const crypto = require('crypto');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-
-// Serve static files (CSS, JavaScript, etc.)
-app.use(express.static('public'));
 
 // Endpoint for processing input data
 app.post('/process', (req, res) => {
@@ -26,6 +23,9 @@ app.post('/process', (req, res) => {
     // Send the hashed data as response
     res.json({ result: hashedData });
 });
+
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
 
 // Start the server
 app.listen(port, () => {
