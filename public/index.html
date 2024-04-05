@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sci-Fi Cryptography</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             background-color: #000;
@@ -42,7 +43,7 @@
                 <label for="inputData">Enter words to encrypt:</label>
                 <input  id="inputData" class="form-control" name="input_data" required>
             </div>
-            <button type="button" onclick="encryptData()" class="btn btn-primary">Encrypt</button>
+            <button type="submit" class="btn btn-primary">Encrypt</button>
         </form>
         <div id="result" class="mt-3"></div>
     </div>
@@ -52,6 +53,7 @@
             <iframe src="https://media.licdn.com/dms/image/D4E12AQEHiNXwKCl4EQ/article-cover_image-shrink_600_2000/0/1696254265099?e=2147483647&v=beta&t=7OupRtUNCN5udbyR23FKoRKClJ3UporHrHu3zj74fZ8"></iframe>
         </p>
     </div>
+            
 
     <script>
         function encryptData() {
