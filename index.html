@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sci-Fi Cryptography</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            padding: 50px;
+        }
+        #result {
+            display: none;
+        }
+        .processing {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            color: #fff;
+            font-size: 24px;
+        }
+        iframe{
+            height: 170px;
+            width: 278px;
+        }
+        
+        .lockAnimation {
+            animation: lockAnimation 4s infinite linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="mb-4">Sci-Fi Cryptography</h1>
+        <form id="inputForm">
+            <div class="form-group">
+                <label for="inputData">Enter words to encrypt:</label>
+                <input  id="inputData" class="form-control" name="input_data" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Encrypt</button>
+        </form>
+        <div id="result" class="mt-3"></div>
+    </div>
+
+    <div id="processing" class="processing">
+        
+        <p class="mt-2">
+            <iframe src="https://media.licdn.com/dms/image/D4E12AQEHiNXwKCl4EQ/article-cover_image-shrink_600_2000/0/1696254265099?e=2147483647&v=beta&t=7OupRtUNCN5udbyR23FKoRKClJ3UporHrHu3zj74fZ8"  ></iframe></p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $('#inputForm').submit(function(event) {
+            event.preventDefault();
+
+            var inputData = $('#inputData').val();
+            $('#processing').fadeIn();
+
+            $.ajax({
+                type: 'POST',
+                url: '/process',
+                data: { input_data: inputData },
+                success: function(response) {
+                    setTimeout(function() {
+                        $('#result').html('<div class="alert alert-success" role="alert">The encrypted result of ' + inputData + ' is ' + response.result + '.</div>').fadeIn();
+                        $('#processing').fadeOut();
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    $('#result').html('<div class="alert alert-danger" role="alert">An error occurred. Please try again.</div>').fadeIn();
+                    $('#processing').fadeOut();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
